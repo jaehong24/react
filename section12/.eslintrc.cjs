@@ -13,6 +13,9 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react/jsx-no-target-blank': 'off',
+    'editor.codeActionsOnSave': { 'source.fixAll.eslint': true },
+
+    'eslint.workingDirectories': [{ mode: 'auto' }],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
