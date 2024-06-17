@@ -7,6 +7,9 @@ import Diary from './pages/Diary'
 import Edit from './pages/Edit'
 import Notfound from './pages/Notfound'
 
+export const DiaryStateContext = createContext()
+export const DiaryDispatchContext = createContext()
+
 function App() {
   const nav = useNavigate()
   const idRef = useRef(3)
@@ -14,15 +17,21 @@ function App() {
   const mockData = [
     {
       id: 1,
-      createDate: new Date().getTime(),
+      createDate: new Date('2024-06-17').getTime(),
       emotionId: 1,
       content: '1번일기 내용',
     },
     {
       id: 2,
-      createDate: new Date().getTime(),
-      emotionId: 2,
+      createDate: new Date('2024-06-16').getTime(),
+      emotionId: 5,
       content: '2번일기 내용',
+    },
+    {
+      id: 3,
+      createDate: new Date('2024-05-16').getTime(),
+      emotionId: 3,
+      content: '3번일기 내용',
     },
   ]
 
@@ -43,24 +52,24 @@ function App() {
 
   const [data, dispatch] = useReducer(reducer, mockData)
 
-  const onCreate = (createdDate, emotionId, content) => {
+  const onCreate = (createDate, emotionId, content) => {
     dispatch({
       type: 'CREATE',
       data: {
         id: idRef.current++,
-        createdDate,
+        createDate,
         emotionId,
         content,
       },
     })
   }
 
-  const onUpdate = (id, createdDate, emotionId, content) => {
+  const onUpdate = (id, createDate, emotionId, content) => {
     dispatch({
       type: 'UPDATE',
       data: {
         id,
-        createdDate,
+        createDate,
         emotionId,
         content,
       },
@@ -75,9 +84,6 @@ function App() {
       },
     })
   }
-
-  const DiaryStateContext = createContext()
-  const DiaryDispatchContext = createContext()
 
   return (
     <>
